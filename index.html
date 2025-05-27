@@ -43,7 +43,7 @@
   <div class="container">
     <h2>Ar laimėjai?</h2>
     <p>
-      Taškai: <input type="number" id="score" min="0" placeholder="Pvz. 18">
+      Taškai: <input type="number" id="score" min="0" placeholder="Pvz. 17">
     </p>
     <p>
       Iš kiek taškų: <input type="number" id="max" value="20" min="1">
@@ -66,9 +66,9 @@
       }
 
       const percent = ((score / max) * 100).toFixed(1);
-      let message = percent >= 90 ? "🎉 Laimėjai!" : "❌ Nepavyko.";
+      let message = percent >= 85 ? "🎉 Laimėjai!" : "❌ Nepavyko.";
 
-      result.style.color = percent >= 90 ? "green" : "red";
+      result.style.color = percent >= 85 ? "green" : "red";
       result.innerHTML = `Rezultatas: ${percent}%<br>${message}`;
     }
   </script>
