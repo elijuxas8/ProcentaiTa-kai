@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Rezultatų skaičiuoklė</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+      width: 80px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Rezultatų skaičiuoklė</h2>
+    <p>
+      Taškai: <input type="number" id="score" min="0" placeholder="Pvz. 15">
+    </p>
+    <p>
+      Maks. taškai: <input type="number" id="max" value="20" min="1">
+    </p>
+    <button onclick="calculate()">Skaičiuoti</button>
+
+    <div class="result" id="resultArea"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      const score = parseFloat(document.getElementById("score").value);
+      const max = parseFloat(document.getElementById("max").value);
+      const result = document.getElementById("resultArea");
+
+      if (isNaN(score) || isNaN(max) || score < 0 || max <= 0 || score > max) {
+        result.innerHTML = "Įveskite teisingus duomenis.";
+        result.style.color = "red";
+        return;
+      }
+
+      const percent = ((score / max) * 100).toFixed(1);
+      let grade;
+      let comment;
+
+      if (percent >= 90) {
+        grade = 10;
+        comment = "Puikiai!";
+      } else if (percent >= 80) {
+        grade = 9;
+        comment = "Labai gerai.";
+      } else if (percent >= 70) {
+        grade = 8;
+        comment = "Gerai.";
+      } else if (percent >= 60) {
+        grade = 7;
+        comment = "Vidutiniškai.";
+      } else if (percent >= 50) {
+        grade = 6;
+        comment = "Silpnai.";
+      } else if (percent >= 40) {
+        grade = 5;
+        comment = "Labai silpnai.";
+      } else {
+        grade = 4;
+        comment = "Nepatenkinamai.";
+      }
+
+      result.style.color = "black";
+      result.innerHTML = `
+        <p>Procentai: <strong>${percent}%</strong></p>
+        <p>Pažymys: <strong>${grade}</strong></p>
+        <p>Įvertinimas: <em>${comment}</em></p>
+      `;
+    }
+  </script>
+</body>
+</html>
